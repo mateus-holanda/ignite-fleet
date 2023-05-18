@@ -60,6 +60,10 @@ export function Home() {
     }
   }
 
+  function handleHistoryDetails(id: string) {
+    navigate('arrival', { id });
+  }
+
   useEffect(() => {
     fetchVehicleInUse();
   }, []);
@@ -67,7 +71,11 @@ export function Home() {
   useEffect(() => {
     realm.addListener('change', () => fetchVehicleInUse());
 
-    return () => realm.removeListener('change', fetchVehicleInUse);
+    return () => {
+      if (realm && !realm.isClosed) {
+        realm.removeListener('change', fetchVehicleInUse);
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -92,7 +100,10 @@ export function Home() {
           data={vehicleHistory}
           keyExtractor={item => item.id}
           renderItem={({ item }) => (
-            <HistoryCard data={item} />
+            <HistoryCard
+              data={item}
+              onPress={() => handleHistoryDetails(item.id)}
+            />
           )}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingBottom: 100 }}

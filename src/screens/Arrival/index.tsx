@@ -25,6 +25,8 @@ export function Arrival() {
 
   const history = useObject(History, new BSON.UUID(id));
 
+  const title = history?.status === 'departure' ? 'Arrival' : 'Details';
+
   function handleRemoveVehicleUsage() {
     Alert.alert(
       'Cancel',
@@ -65,7 +67,7 @@ export function Arrival() {
 
   return (
     <Container>
-      <Header title="Arrival" />
+      <Header title={title} />
 
       <Content>
         <Label>
@@ -83,7 +85,10 @@ export function Arrival() {
         <Description>
           {history?.description}
         </Description>
+      </Content>
 
+      {
+        history?.status === 'departure' &&
         <Footer>
           <ButtonIcon
             icon={X}
@@ -95,7 +100,7 @@ export function Arrival() {
             onPress={handleArrivalRegister}
           />
         </Footer>
-      </Content>
+      }
     </Container>
   );
 }
