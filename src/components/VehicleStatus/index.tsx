@@ -11,7 +11,7 @@ interface VehicleStatusProps extends TouchableOpacityProps {
 export function VehicleStatus({ licensePlate = null, ...rest }: VehicleStatusProps) {
   const theme = useTheme();
 
-  const Icon = licensePlate ? Key : Car;
+  const Icon = licensePlate ? Car : Key;
   const message = licensePlate ? `Vehicle ${licensePlate} in use. ` : 'No vehicles currently in use. ';
   const status = licensePlate ? 'arrival' : 'departure';
 

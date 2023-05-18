@@ -26,7 +26,7 @@ export function HomeHeader() {
       />
       <Greeting>
         <Message>
-          Hi
+          Hi,
         </Message>
 
         <Name>
